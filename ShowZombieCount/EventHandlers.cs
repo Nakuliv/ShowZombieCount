@@ -19,7 +19,7 @@ namespace ShowZombieCount
             for (; ; )
             {
                     message.Clear();
-                    foreach (Player ply in Player.List)
+                    foreach (Player ply in Player.Get(RoleType.Scp049))
                 {
                     var ZombieCount = Player.Get(RoleType.Scp0492).Count();
                     if (Plugin.Singleton.Config.text_position != 0 && Plugin.Singleton.Config.text_position < 0)
