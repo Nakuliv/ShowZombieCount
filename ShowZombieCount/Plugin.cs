@@ -16,9 +16,9 @@ namespace ShowZombieCount
         public override PluginPriority Priority => PluginPriority.Default;
 
         public override string Name { get; } = "ShowZombieCount";
-        public override string Author { get; } = "Cwaniak U.G";
+        public override string Author { get; } = "Naku (Cwaniaak.)";
         public override Version Version => new Version(1, 2, 0);
-        public override Version RequiredExiledVersion => new Version(2, 3, 4);
+        public override Version RequiredExiledVersion => new Version(2, 4, 0);
 
         private EventHandlers handlers;
 
