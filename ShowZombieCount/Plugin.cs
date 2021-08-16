@@ -18,7 +18,7 @@ namespace ShowZombieCount
         public override string Name { get; } = "ShowZombieCount";
         public override string Author { get; } = "Naku (Cwaniaak.)";
         public override Version Version => new Version(1, 2, 0);
-        public override Version RequiredExiledVersion => new Version(2, 4, 0);
+        public override Version RequiredExiledVersion => new Version(2, 11, 1);
 
         private EventHandlers handlers;
 
