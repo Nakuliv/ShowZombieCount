@@ -14,29 +14,32 @@ namespace ShowZombieCount
         public HashSet<string> scp049 = new HashSet<string>();
         public List<CoroutineHandle> coroutines = new List<CoroutineHandle>();
         StringBuilder message = new StringBuilder();
-        private IEnumerator<float> ZombieCountMessage(Player ply)
+        private IEnumerator<float> ZombieCountMessage()
         {
-            while (ply.Role == RoleType.Scp049)
+            while (Player.Get(RoleType.Scp049).Count() >= 0)
             {
-                message.Clear();
-                var ZombieCount = Player.Get(RoleType.Scp0492).Count();
-                if (Plugin.Singleton.Config.text_position != 0 && Plugin.Singleton.Config.text_position < 0)
+                foreach (Player plys in Player.Get(RoleType.Scp049))
                 {
-                    for (int i = Plugin.Singleton.Config.text_position; i < 0; i++)
+                    message.Clear();
+                    var ZombieCount = Player.Get(RoleType.Scp0492).Count();
+                    if (Plugin.Singleton.Config.text_position != 0 && Plugin.Singleton.Config.text_position < 0)
                     {
-                        message.Append("\n");
+                        for (int i = Plugin.Singleton.Config.text_position; i < 0; i++)
+                        {
+                            message.Append("\n");
+                        }
                     }
-                }
-                else if (Plugin.Singleton.Config.text_position != 0 && Plugin.Singleton.Config.text_position > 0)
-                {
-                    for (int i = 0; i < Plugin.Singleton.Config.text_position; i++)
+                    else if (Plugin.Singleton.Config.text_position != 0 && Plugin.Singleton.Config.text_position > 0)
                     {
-                        message.Append("\n");
+                        for (int i = 0; i < Plugin.Singleton.Config.text_position; i++)
+                        {
+                            message.Append("\n");
+                        }
                     }
+                    message.Append(Plugin.Singleton.Config.text);
+                    message.Replace("%zombiecount", $"{ZombieCount}");
+                    plys.ShowHint(message.ToString(), 1f);
                 }
-                message.Append(Plugin.Singleton.Config.text);
-                message.Replace("%zombiecount", $"{ZombieCount}");
-                ply.ShowHint(message.ToString(), 1f);
 
                 yield return Timing.WaitForSeconds(1f);
             }
@@ -47,7 +50,7 @@ namespace ShowZombieCount
             if (ev.NewRole == RoleType.Scp049 && !scp049.Contains(ev.Player.UserId))
             {
                 scp049.Add(ev.Player.UserId);
-                coroutines.Add(Timing.RunCoroutine(ZombieCountMessage(ev.Player)));
+                coroutines.Add(Timing.RunCoroutine(ZombieCountMessage()));
             }
 
             else if (scp049.Contains(ev.Player.UserId) && !(ev.NewRole == RoleType.Scp049))
