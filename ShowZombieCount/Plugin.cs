@@ -7,7 +7,6 @@ using System.Reflection;
 
 using PlayerEv = Exiled.Events.Handlers.Player;
 using ServerEv = Exiled.Events.Handlers.Server;
-using MEC;
 
 namespace ShowZombieCount
 {
@@ -17,8 +16,8 @@ namespace ShowZombieCount
 
         public override string Name { get; } = "ShowZombieCount";
         public override string Author { get; } = "Naku (Cwaniaak.)";
-        public override Version Version => new Version(1, 3, 1);
-        public override Version RequiredExiledVersion => new Version(2, 11, 1);
+        public override Version Version => new Version(1, 4, 0);
+        public override Version RequiredExiledVersion => new Version(3, 0, 0);
 
         private EventHandlers handlers;
 
